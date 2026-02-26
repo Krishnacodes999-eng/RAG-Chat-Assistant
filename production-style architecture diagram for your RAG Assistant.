@@ -1,0 +1,42 @@
+                ┌────────────────────┐
+                │     React UI       │
+                │  (Chat Interface)  │
+                └─────────┬──────────┘
+                          │
+                          ▼
+                ┌────────────────────┐
+                │  POST /api/chat    │
+                │   Express Server   │
+                └─────────┬──────────┘
+                          │
+        ┌─────────────────┼─────────────────┐
+        ▼                                   ▼
+┌───────────────┐                 ┌─────────────────┐
+│ Query Embed   │                 │ Session Memory  │
+│ (OpenAI API)  │                 │ (Last 3–5 msgs) │
+└───────────────┘                 └─────────────────┘
+        │
+        ▼
+┌────────────────────────────┐
+│ Vector Store (In-Memory)   │
+│ - Stored Doc Embeddings    │
+│ - Cosine Similarity        │
+└───────────────┬────────────┘
+                │
+                ▼
+        Top 3 Relevant Chunks
+                │
+                ▼
+┌────────────────────────────┐
+│ Prompt Construction Layer  │
+│ Context + History + Query  │
+└───────────────┬────────────┘
+                │
+                ▼
+        ┌────────────────┐
+        │ OpenAI LLM     │
+        │ (gpt-4o-mini)  │
+        └────────┬───────┘
+                 │
+                 ▼
+          JSON Response
